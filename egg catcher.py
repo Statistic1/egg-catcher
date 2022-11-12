@@ -4,7 +4,7 @@ from tkinter import Canvas, Tk, messagebox, font
 
 canvas_width = 800
 canvas_height = 400
-
+#hello
 root = Tk()
 c = Canvas(root, width = canvas_width, height = canvas_height, background = 'deep sky blue')
 c.create_rectangle(-5, canvas_height - 100, canvas_width + 5, canvas_height + 5, fill = 'sea green', width = 0)
@@ -55,5 +55,25 @@ def move_eggs():
             egg_dropped(egg)
     root.after(egg_speed, move_eggs)
 
-create_egg()
-move_eggs()
+def egg_dropped(egg):
+    eggs.remove(egg)
+    c.delete(egg)
+    lose_a_life()
+    if lives_remaining == 0:
+        messagebox.showinfo('Gameover!', 'Final Score: ' +str(score))
+        root.destroy()
+
+def lose_a_life():
+    global lives_remaianing
+    lives_remaining-=1
+    c.itemconfigure(lives_text, text='Lives: '+str(lives_remaining))
+
+def check_catch():
+    (catcher_x, catcher_y,catcher_x2, catcher_y2) = c.coords(catcher)
+for egg in eggs:
+    (egg_x,egg_y,egg_x2,egg_y2) = c.coords(egg)
+    if catcher_x< egg_x and egg_x2<catcherx2 and catcher_y2 - egg_y2<40
+    eggs.remove(egg)
+    c.delete(egg)
+    increase_score(egg_score)
+root.after(100,check_catch)
